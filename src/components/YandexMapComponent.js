@@ -12,31 +12,30 @@ const YandexMapComponent = ({ attractions }) => {
 
       ymaps.ready(() => {
         const map = new ymaps.Map(mapRef.current, {
-          center: [47.5, 41], // Примерные координаты центра
-          zoom: 7, // Начальный масштаб
+          center: [47.5, 41],
+          zoom: 12,
           controls: ['zoomControl', 'fullscreenControl']
         });
 
-        // Координаты северо-западной и юго-восточной точек Ростовской области
-        const bounds = [[49.0, 38.0], [45.8, 43.0]]; // Примерные координаты
+        const bounds = [[49.0, 38.0], [45.8, 43.0]]; 
 
-        // Устанавливаем область видимости карты
         map.setBounds(bounds, {
-          checkZoomRange: true // Проверяем, чтобы масштаб не выходил за допустимые пределы
+          checkZoomRange: true 
         });
 
+
+
         attractions.forEach(attraction => {
-            const imagePath = 'https://i.pinimg.com/736x/1f/32/de/1f32de75ae0a1ac218a902f6f361a6d7.jpg'; // Путь к изображению
             const balloonContent = `
-              <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-left: 30px; overflow: hidden">
                 <h3>${attraction.name}</h3>
                 <p>${attraction.description}</p>
-                <img src="" alt="${attraction.name}" style="max-width: 200px; max-height: 200px;">
+                <img src="/${attraction.id}.jpg" alt="${attraction.name}" style="max-width: 500px; max-height: 200px;">
               </div>
             `;
 
           const placemark = new ymaps.Placemark([attraction.latitude, attraction.longitude], {
-            balloonContent: balloonContent, // Используем balloonContent
+            balloonContent: balloonContent, 
           });
           map.geoObjects.add(placemark);
         });
@@ -52,7 +51,7 @@ const YandexMapComponent = ({ attractions }) => {
     };
   }, [attractions]);
 
-  return <div ref={mapRef} style={{ width: '100%', height: '500px' }}></div>;
+  return <div ref={mapRef} style={{ width: '900px', height: '700px' }}></div>;
 };
 
 export default YandexMapComponent;
