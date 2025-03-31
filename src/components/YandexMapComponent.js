@@ -6,7 +6,7 @@ const YandexMapComponent = ({ attractions }) => {
   useEffect(() => {
     const initMap = () => {
       if (typeof ymaps === 'undefined') {
-        console.error("Yandex Maps API не загрузился!");
+        console.error("Yandex Maps API не загрузился");
         return;
       }
 
@@ -23,14 +23,12 @@ const YandexMapComponent = ({ attractions }) => {
           checkZoomRange: true 
         });
 
-
-
         attractions.forEach(attraction => {
             const balloonContent = `
               <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-left: 30px; overflow: hidden">
                 <h3>${attraction.name}</h3>
                 <p>${attraction.description}</p>
-                <img src="/${attraction.id}.jpg" alt="${attraction.name}" style="max-width: 500px; max-height: 200px;">
+                <img src="/images/${attraction.id}.jpg" alt="${attraction.name}" style="max-width: 500px; max-height: 200px;">
               </div>
             `;
 
